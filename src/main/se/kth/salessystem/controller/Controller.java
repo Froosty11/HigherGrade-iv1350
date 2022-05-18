@@ -9,11 +9,8 @@ import main.se.kth.salessystem.integration.ReceiptPrinter;
 import main.se.kth.salessystem.model.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import main.se.kth.salessystem.integration.ExternalInventorySystem;
-import main.se.kth.salessystem.view.TotalRevenueView;
 
 
 /**
@@ -29,8 +26,6 @@ public class Controller {
     private ReceiptPrinter rp;
     private StoreDTO store;
     private ItemScanner scnr;
-    private TotalRevenueFileOutput trfo;
-    private TotalRevenueView trv;
 
 
     /**
@@ -44,8 +39,6 @@ public class Controller {
         act = new AccountingSystem();
         rp = new ReceiptPrinter();
         scnr = new ItemScanner(ext);
-        trfo = new TotalRevenueFileOutput();
-        trv = new TotalRevenueView();
 
     }
     /**
@@ -60,8 +53,6 @@ public class Controller {
         act = new AccountingSystem();
         rp = new ReceiptPrinter();
         scnr = new ItemScanner(ext);
-        trfo = new TotalRevenueFileOutput();
-        trv = new TotalRevenueView();
 
     }
 
@@ -71,8 +62,6 @@ public class Controller {
     * */
     public boolean startNewSale(int customerID) {
         currentActive = new Sale();
-        currentActive.addObserver(trfo);
-        currentActive.addObserver(trv);
         return true;
     }
     /**
@@ -89,6 +78,16 @@ public class Controller {
         }
         return false;
     }
+
+    /**
+     * Adds observer to currentActive sale. Has to be done for each individual sale, so after you call the
+     * add new sale function. But view can access it
+     * @param obs
+     */
+    public void addObserverToSale(Observer obs){
+        currentActive.addObserver(obs);
+    }
+
 /**
  * Ends the current sale. Adds the sale to previously done sales in ACT. Prints a receipt using RP.
  * @param paid the amount of money paid. If it'cashier less then the total cost of the sale, returns false

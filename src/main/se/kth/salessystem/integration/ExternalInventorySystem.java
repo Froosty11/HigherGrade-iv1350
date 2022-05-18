@@ -34,7 +34,6 @@ public class ExternalInventorySystem {
                 line++;
             }
         } catch (FileNotFoundException e) { // quick exception if file is missing
-            System.out.println("Error. File not found. ");
             e.printStackTrace();
         }
     }
@@ -124,8 +123,6 @@ public class ExternalInventorySystem {
         if(instance == null){
             instance = new ExternalInventorySystem();
         }
-        else
-            System.out.println("ExternalInventory instance already exists- giving you the existing one.");
         return instance;
     }
 

@@ -4,6 +4,8 @@ package main.se.kth.salessystem.model;
 import main.se.kth.salessystem.dtos.SaleDTO;
 import main.se.kth.salessystem.dtos.StoreDTO;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -84,7 +86,5 @@ public class Receipt {
 
         return str.toString();
     }
-
-
 }
 

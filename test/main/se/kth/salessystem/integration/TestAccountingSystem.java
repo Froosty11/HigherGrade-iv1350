@@ -3,9 +3,12 @@ import main.se.kth.salessystem.controller.Controller;
 import main.se.kth.salessystem.dtos.SaleDTO;
 import main.se.kth.salessystem.integration.AccountingSystem;
 import main.se.kth.salessystem.integration.ExternalInventorySystem;
+import main.se.kth.salessystem.model.ItemScanner;
 import main.se.kth.salessystem.model.Sale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,18 +16,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TestAccountingSystem {
     private Controller ctrl;
     private AccountingSystem ac;
+    private ItemScanner itemScanner;
     private SaleDTO dto;
+    private Sale temp;
+
 
     /**
      * Setups for potential AC-testing
      */
     @BeforeEach
     void setUp() { //Happens before each se.kth.salessystem.test
+        temp = new Sale();
         ctrl = new Controller();
         ac = new AccountingSystem();
-        Sale temp = new Sale();
-        ctrl.addItem(3, 2);
+        itemScanner = new ItemScanner( ExternalInventorySystem.getInstance());
+        try{
+            itemScanner.addItemFromBarcode(2,temp, 2);
+        }
+        catch (IOException e){
+            e.printStackTrace(); //never gonna happen lmao
+        }
         dto = temp.endSale("uwu", "kassa 2");
+
     }
 
     /**
@@ -33,6 +46,7 @@ class TestAccountingSystem {
     @Test
     void testRegisterSale() { //makes sure listOfSales contains the correct items after registering sales
         boolean result = false;
+
         ac.registerSale(dto);
         if (ac.getSaleDTO(dto.getSaleID()) != null) {
             result = true;

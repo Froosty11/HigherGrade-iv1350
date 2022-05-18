@@ -8,11 +8,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestExternalInventorySystem {
-
+    private PrintStream printStreamOut;
+    private ByteArrayOutputStream buffer2BePrinted;
     private Item item;
     private ExternalInventorySystem ext;
 
@@ -25,6 +29,12 @@ class TestExternalInventorySystem {
         ext.addItem(item);
         item = new Item(10, 16, 0.6, "Nocco pear", 5);
         ext.addItem(item);
+
+        //for prints
+        buffer2BePrinted = new ByteArrayOutputStream();
+        PrintStream toBeOuted = new PrintStream(buffer2BePrinted);
+        printStreamOut = System.out;
+        System.setOut(toBeOuted);
 
 
     }

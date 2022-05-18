@@ -3,7 +3,6 @@ package main.se.kth.salessystem.model;
 
 import main.se.kth.salessystem.dtos.SaleDTO;
 import main.se.kth.salessystem.integration.ExternalInventorySystem;
-import main.se.kth.salessystem.view.TotalRevenueView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,7 +125,6 @@ public class Sale {
         }
         return str.toString();
     }
-
     public void updateObservers(double amount){
         for (Observer o : observerList) {
             o.update(amount);

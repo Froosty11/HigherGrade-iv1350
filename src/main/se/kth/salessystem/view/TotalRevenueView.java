@@ -1,24 +1,24 @@
 package main.se.kth.salessystem.view;
 
-import main.se.kth.salessystem.model.Observer;
 
 /**
  * TotalRevenueView sends information to display about the current revenue
  */
-public class TotalRevenueView implements Observer{
+class TotalRevenueView extends TotalRevenue {
     private double totalPaid;
     public TotalRevenueView(){
         totalPaid = 0;
     }
 
     @Override
-    public void update(double amount) {
-        totalPaid += amount;
-        //for each update we're printing total revenue
-        System.out.println(totalToString());
-
+    protected void doShowTotalIncome() throws Exception {
+        System.out.println("OBSERVER TOTALREVENUEVIEW UPDATE");
+        System.out.println("TotalRevenue: " + totalRevenue);
     }
-    public String totalToString(){
-        return "OBSERVER: "+ totalPaid + " SEK since start.";
+
+    @Override
+    protected void handleErrors(Exception e) {
+        System.err.println("This shouldn't ever happen, but theres been some error to printing the ObserverView");
+
     }
 }
