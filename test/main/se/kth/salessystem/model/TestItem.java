@@ -20,6 +20,9 @@ class TestItem {
         item = null;
     }
 
+    /**
+     * Tests if the string is correct. Technically only tests the string part- should be fixed.
+     */
     @Test
     void toStringTest() {
         boolean expectedResult = true;

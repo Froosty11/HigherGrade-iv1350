@@ -22,20 +22,22 @@ class ReceiptPrinterTest {
     ReceiptPrinter rPrinter;
     PrintStream printStreamOut;
     ByteArrayOutputStream buffer2BePrinted;
+
+    /**
+     * Same setup we do for all printtests, setups a buffer, and changes out to our printstream
+     */
     @BeforeEach
     void setUp() {
         Controller temp = new Controller(new TotalRevenueFileOutput(), new TotalRevenueView());
         rPrinter = new ReceiptPrinter();
         buffer2BePrinted = new ByteArrayOutputStream();
-        PrintStream toBeOuted = new PrintStream(buffer2BePrinted);
-        printStreamOut = System.out;
-        System.setOut(toBeOuted);
+        System.setOut(new PrintStream(buffer2BePrinted));
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
+    /**
+     * Tests that the receipt contains the correct information- we're simlpy doing this by the price
+     * and checking that the price is correct. Should be changed to more thorough.
+     */
     @Test
     void testPrintReceipt() {
         List<Item> list = new ArrayList<>();

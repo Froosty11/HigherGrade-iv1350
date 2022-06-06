@@ -51,6 +51,11 @@ class TestController {
         assertTrue(result, "startNewSale controller error");
     }
 
+    /**
+     * Tests adding one item.
+     * @throws DatabaseNotFoundException if the item requested is 6
+     * @throws ItemNotFoundException if the item is not an item in txt
+     */
     @Test
     void testAddItem() throws DatabaseNotFoundException, ItemNotFoundException {
         boolean result = false;
@@ -62,6 +67,9 @@ class TestController {
 
     }
 
+    /**
+     * Tests ending the sale, making sure the controller returns empty sale string.
+     */
     @Test
     void testEndSale() {
         boolean result = false;
@@ -72,6 +80,9 @@ class TestController {
         assertTrue(result, "Controller.endSale failed junit se.kth.salessystem.test");
     }
 
+    /**
+     * Checks if the sale is empty now after termination.
+     */
     @Test
     void testTerminate() {
         boolean result = false;
@@ -82,6 +93,11 @@ class TestController {
         assertTrue(result, "Controller.terminate failed junit se.kth.salessystem.test");
     }
 
+    /**
+     * Tests adding multiple items.
+     * @throws DatabaseNotFoundException If the item id is 6 or if the database is lost.
+     * @throws ItemNotFoundException If the itemID is incorrect.
+     */
     @Test
     void testAddItems() throws DatabaseNotFoundException, ItemNotFoundException {
         boolean result = false;
@@ -107,7 +123,7 @@ class TestController {
     }
 
     /**
-     *
+     *Tests undoing multiple adds.
      */
     @Test
     void testUndos() throws DatabaseNotFoundException, ItemNotFoundException {

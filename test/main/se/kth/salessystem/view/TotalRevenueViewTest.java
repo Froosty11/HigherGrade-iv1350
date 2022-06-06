@@ -13,15 +13,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class TotalRevenueViewTest {
     private TotalRevenueView toBeTested;
     private ByteArrayOutputStream buffer2BePrinted;
+
+    /**
+     * https://stackoverflow.com/questions/32241057/how-to-test-a-print-method-in-java-using-junit
+     */
     @BeforeEach
     void setUp() {
         Controller temp = new Controller(new TotalRevenueFileOutput(), new TotalRevenueView());
         toBeTested = new TotalRevenueView();
         buffer2BePrinted = new ByteArrayOutputStream();
-        PrintStream toBeOuted = new PrintStream(buffer2BePrinted);
-        System.setOut(toBeOuted);
+        System.setOut(new PrintStream( buffer2BePrinted));
     }
 
+    /**
+     * Tests showing income by buffer comparison
+     */
     @Test
     void testDoShowTotalIncome() {
         toBeTested.newSaleWasMade(69);

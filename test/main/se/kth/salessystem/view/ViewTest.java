@@ -20,14 +20,16 @@ class ViewTest {
         Controller temp = new Controller(new TotalRevenueFileOutput(), new TotalRevenueView());
         toBeTested = new View(temp);
         buffer2BePrinted = new ByteArrayOutputStream();
-        PrintStream toBeOuted = new PrintStream(buffer2BePrinted);
-        System.setOut(toBeOuted);
+        System.setOut(new PrintStream(buffer2BePrinted));
     }
 
     @AfterEach
     void tearDown() {
     }
 
+    /**
+     * Tests view with comparison of a buffer.
+     */
     @Test
     public void testView(){
         toBeTested.hardCodedControllerCalls();

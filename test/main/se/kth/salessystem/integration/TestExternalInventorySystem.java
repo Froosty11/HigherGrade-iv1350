@@ -20,7 +20,9 @@ class TestExternalInventorySystem {
     private Item item;
     private ExternalInventorySystem ext;
 
-
+    /**
+     * Setup to test EXT. Adds a bunch of items to it
+     */
     @BeforeEach
     void setUp() {
         //beforeEach se.kth.salessystem.test is ran, we reset add some items to an inventory.
@@ -30,11 +32,7 @@ class TestExternalInventorySystem {
         item = new Item(10, 16, 0.6, "Nocco pear", 5);
         ext.addItem(item);
 
-        //for prints
-        buffer2BePrinted = new ByteArrayOutputStream();
-        PrintStream toBeOuted = new PrintStream(buffer2BePrinted);
-        printStreamOut = System.out;
-        System.setOut(toBeOuted);
+
 
 
     }
@@ -46,6 +44,9 @@ class TestExternalInventorySystem {
 
     }
 
+    /**
+     * Tests if instock is correct, we know some stuff is in stock, so its easy.
+     */
     @Test
     void testInStock() {
         boolean inList = false;
@@ -64,6 +65,9 @@ class TestExternalInventorySystem {
         assertTrue(inList, "banana not in stock");
     }
 
+    /**
+     * Tests adding item. We're using instock, since thats tested.
+     */
 
     @Test
     void testAddItem() {

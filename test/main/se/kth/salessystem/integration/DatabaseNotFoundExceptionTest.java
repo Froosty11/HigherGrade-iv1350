@@ -19,6 +19,10 @@ class DatabaseNotFoundExceptionTest {
     void tearDown() {
     }
 
+    /**
+     * Tests getting admin message- should
+     * TODO: replace admin message with usermessage and use regular exception method message.
+     */
     @Test
     void testGetAdminMessage() {
         try{

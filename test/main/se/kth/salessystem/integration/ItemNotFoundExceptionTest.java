@@ -14,18 +14,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ItemNotFoundExceptionTest {
      private ExternalInventorySystem ext;
+
+    /**
+     * Gets the EXT before each test.
+     */
     @BeforeEach
     void setUp() {
         ext = ExternalInventorySystem.getInstance();
 
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
+    /**
+     * Tests that the ID of the wrong item is return the correct itemID
+     */
     @Test
-    void getIncorrectID() {
+    void testGetIncorrectID() {
         boolean isCorrect = false;
         try{
             ext.getItem(29);
@@ -42,8 +45,11 @@ class ItemNotFoundExceptionTest {
 
     }
 
+    /**
+     * Tests the default(?) message. Not needed.
+     */
     @Test
-    void getMessage() {
+    void testGetMessage() {
         boolean msgEqualsExpectedMessage = false;
 
         try{
@@ -57,8 +63,11 @@ class ItemNotFoundExceptionTest {
         assertTrue(msgEqualsExpectedMessage, "getMessage for itemNotFoundException not handled correctly");
     }
 
+    /**
+     * Tests admin message. SHould be replaced, read DBexception
+     */
     @Test
-    void getAdminMessage() {
+    void testGetAdminMessage() {
         boolean msgEqualsExpectedMessage = false;
 
         try{

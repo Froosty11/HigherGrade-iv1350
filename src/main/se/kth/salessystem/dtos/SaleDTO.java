@@ -28,7 +28,6 @@ public class SaleDTO {
      */
     public SaleDTO(double price, double vat, List<Item> list, String pos, int i) {
 
-        //constructor for making a sale DTO
         this.totalPrice = price;
         this.pointOfSale = pos;
         this.listOfItems = list;
@@ -41,7 +40,6 @@ public class SaleDTO {
      * @return a new deep copy
      */
     public SaleDTO copy() {
-        //copy of object with new adress, so we can edit it without editing the old copy
         SaleDTO temp = new SaleDTO(this.totalPrice, this.totalVAT, this.listOfItems, this.pointOfSale, this.saleID);
         temp.setCashier(this.cashier);
         return temp;
@@ -53,8 +51,6 @@ public class SaleDTO {
      * @return true if equal, false in other states
      */
     public boolean equal(SaleDTO obj) {
-        //compares two saleDTOs with eachother, to make sure they're the same. it doesn't compare all
-        //aspects because that would take time.
         if (obj.getSaleID() == this.saleID && obj.cashier.equals(this.cashier)
                 && obj.listOfItems.equals(this.listOfItems)) return true;
         return false;

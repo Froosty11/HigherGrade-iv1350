@@ -30,6 +30,11 @@ public class TotalRevenueFileOutput extends TotalRevenue{
             }
         }
 
+    /**
+     * Shows income, specifically throws an exception if the paid amount is -1, this is to test the printing
+     * in case of an exception(that would happen with Logger).
+     * @throws Exception from logger
+     */
     @Override
     protected void doShowTotalIncome() throws Exception {
             if(totalRevenue == 69){
@@ -39,6 +44,12 @@ public class TotalRevenueFileOutput extends TotalRevenue{
         logger.write("TOTAL REVENUE: " + totalRevenue);
         logger.close();
     }
+
+    /**
+     * Handles exceptions, just prints them.
+     * @param e
+     *
+     */
     @Override
     protected void handleErrors(Exception e) {
         e.printStackTrace();

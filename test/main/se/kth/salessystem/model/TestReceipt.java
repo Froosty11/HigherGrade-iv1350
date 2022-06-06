@@ -33,8 +33,11 @@ class TestReceipt {
         rec = null;
     }
 
+    /**
+     * Tests the tostring method- we're using contains again should be equals but its hard.
+     */
     @Test
-    void receiptToStringTest() { //compares string to dto output
+    void testReceiptToString() { //compares string to dto output
         boolean expectedResult = true;
         String st2 = rec.toString();
         boolean result = st2.contains("Ica Nära");

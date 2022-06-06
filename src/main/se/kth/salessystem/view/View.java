@@ -39,18 +39,20 @@ public class View {
             cont.startNewSale(69);
             addItem(2, 2);
             addItem(4, 2);
+            System.out.println("Sample Receipt 1\n");
+
             cont.endSale(200, "Yas", "Kassa 1");
-            System.out.println("Starts a second new sale! \n");
+            System.out.println("\n\nStarts a second new sale! \n");
             cont.startNewSale(67);
             addItem(1, 2);
             addItem(2, 1);
+            System.out.println("Sample Receipt 2\n");
+
             cont.endSale(200, "Edvin", "Kassa 2");
         } catch (IOException i) {
             i.printStackTrace();
         }
-        System.out.println("Sample Receipt 1\n");
 
-        if (!cont.endSale(50000, "Edvin", "Kassa 1")) System.out.println("Not enough funds!");
     }
 
 

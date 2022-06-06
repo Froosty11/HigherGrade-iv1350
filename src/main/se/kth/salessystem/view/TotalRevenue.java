@@ -10,14 +10,18 @@ public abstract class TotalRevenue implements Observer {
 
 
     /**
-     * Template method constructor- irrelevant except for super.
-     * @param priceOfTheSaleThatWasJustMade
+     * Updates an observer with an amount of money.
+     * @param priceOfTheSaleThatWasJustMade the amount paid to update the observer
      */
     @Override
     public void newSaleWasMade(double priceOfTheSaleThatWasJustMade) {
         calculateTotalIncome ( priceOfTheSaleThatWasJustMade );
         showTotalIncome ();
     }
+
+    /**
+     * Template function with all other functions run in same order- same exception handling too.
+     */
     private void showTotalIncome () {
         try {
             doShowTotalIncome ();
@@ -26,10 +30,21 @@ public abstract class TotalRevenue implements Observer {
         }
     }
 
+    /**
+     * Abstract function to be overwridden
+     * @throws Exception
+     */
     protected abstract void doShowTotalIncome () throws Exception ;
-
+    /**
+     * Abstract function to be overwridden
+     * @throws Exception
+     */
     protected abstract void handleErrors ( Exception e );
 
+    /**
+     * Simply just adds money to the Observer.
+     * @param moneyToAdd
+     */
     private void calculateTotalIncome(double moneyToAdd){
         totalRevenue += moneyToAdd;
     }
