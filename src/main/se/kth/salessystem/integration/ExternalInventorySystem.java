@@ -34,6 +34,7 @@ public class ExternalInventorySystem {
                 line++;
             }
         } catch (FileNotFoundException e) { // quick exception if file is missing
+            System.out.println("Error. File not found. ");
             e.printStackTrace();
         }
     }
@@ -41,6 +42,8 @@ public class ExternalInventorySystem {
     /**
      * Gets an item from the inventory.
      * @param id the id of the item ur looking from. Would be the index in the currentInventory list.
+     * @throws ItemNotFoundException if an item doesn't exist in inventory
+     * @throws DatabaseNotFoundException if the item requested is 6, or the database is offline
      * @return currentInventory[id] item
      */
     public Item getItem(int id) throws ItemNotFoundException, DatabaseNotFoundException{
@@ -119,10 +122,19 @@ public class ExternalInventorySystem {
         currentInventory.add(item);
 
     }
+
+    /**
+     * This is our getInstance function for the Singleton pattern. It's a constructor that only runs the first time
+     * it is called- and thereafter only returning the already existing one. This gives us still a public access
+     *
+     * @return Singleton ExternalInventorySystem
+     */
     public static ExternalInventorySystem getInstance(){
         if(instance == null){
             instance = new ExternalInventorySystem();
         }
+        else
+            System.out.println("ExternalInventory instance already exists- giving you the existing one.");
         return instance;
     }
 

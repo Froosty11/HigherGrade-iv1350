@@ -4,7 +4,7 @@ package main.se.kth.salessystem.view;
 /**
  * TotalRevenueView sends information to display about the current revenue
  */
-class TotalRevenueView extends TotalRevenue {
+public class TotalRevenueView extends TotalRevenue {
     private double totalPaid;
     public TotalRevenueView(){
         totalPaid = 0;

@@ -5,6 +5,7 @@ import main.se.kth.salessystem.dtos.SaleDTO;
 import main.se.kth.salessystem.dtos.StoreDTO;
 import main.se.kth.salessystem.model.Item;
 import main.se.kth.salessystem.model.Receipt;
+import main.se.kth.salessystem.view.TotalRevenueView;
 import main.se.kth.salessystem.view.View;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ class ReceiptPrinterTest {
     ByteArrayOutputStream buffer2BePrinted;
     @BeforeEach
     void setUp() {
-        Controller temp = new Controller();
+        Controller temp = new Controller(new TotalRevenueFileOutput(), new TotalRevenueView());
         rPrinter = new ReceiptPrinter();
         buffer2BePrinted = new ByteArrayOutputStream();
         PrintStream toBeOuted = new PrintStream(buffer2BePrinted);

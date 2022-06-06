@@ -1,8 +1,11 @@
 package main.se.kth.salessystem.view;
 
 import main.se.kth.salessystem.controller.Controller;
+import main.se.kth.salessystem.integration.DatabaseNotFoundException;
+import main.se.kth.salessystem.integration.ItemNotFoundException;
 
-import java.io.PrintStream;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Theoretical class containing hardcoded calls to Controller. Should contain code for a display and buttons
@@ -10,18 +13,14 @@ import java.io.PrintStream;
  */
 public class View {
     Controller cont;
-    TotalRevenueView viewObs;
-    TotalRevenueFileOutput outputObs;
-
 
     /**
      * Constructor for a view. Makes a controller obj.
+     *
      * @param contr
      */
     public View(Controller contr) {
         cont = contr;
-        outputObs = new TotalRevenueFileOutput();
-        viewObs = new TotalRevenueView();
 
 
     }
@@ -34,27 +33,41 @@ public class View {
      */
     public void hardCodedControllerCalls() {
 
+        try {
 
-        System.out.println("Starts one new sale- id 69\n");
-        startASale(69);
-        System.out.println("Adding 2x Monster Mango");
-        cont.addItem(2, 2);
-        System.out.println("Adding tortilla bread");
-        cont.addItem(4, 2);
-        cont.endSale(200, "Yas", "Kassa 1");
-        startASale(294);
-        cont.addItem(1,2);
-        cont.addItem(2);
-        cont.endSale(200, "Edvin", "Kassa 2");
+            System.out.println("Starts one new sale-}\n");
+            cont.startNewSale(69);
+            addItem(2, 2);
+            addItem(4, 2);
+            cont.endSale(200, "Yas", "Kassa 1");
+            System.out.println("Starts a second new sale! \n");
+            cont.startNewSale(67);
+            addItem(1, 2);
+            addItem(2, 1);
+            cont.endSale(200, "Edvin", "Kassa 2");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
         System.out.println("Sample Receipt 1\n");
 
-        //if (!cont.endSale(50000, "Edvin", "Kassa 1")) System.out.println("Not enough funds!");
-    }
-    private void startASale(int customerID){
-        cont.startNewSale(customerID);
-        cont.addObserverToSale(outputObs);
-        cont.addObserverToSale(viewObs);
+        if (!cont.endSale(50000, "Edvin", "Kassa 1")) System.out.println("Not enough funds!");
     }
 
 
+    private void addItem(int id, int count) throws IOException {
+        FileWriter logger = null;
+        try {
+            logger = new FileWriter("src/main/se/kth/salessystem/integration/errorLogs.txt", true);
+            cont.addItem(id, count);
+        } catch (
+                ItemNotFoundException e) {
+            System.out.println(e.getMessage());
+            logger.close();
+        } catch (
+                DatabaseNotFoundException dbException) {
+            System.out.println(dbException.getMessage());
+            logger.write(dbException.getAdminMessage());
+            logger.close();
+        }
+    }
 }

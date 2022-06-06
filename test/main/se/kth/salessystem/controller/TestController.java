@@ -2,6 +2,10 @@ package main.se.kth.salessystem.controller;
 
 
 import main.se.kth.salessystem.controller.Controller;
+import main.se.kth.salessystem.integration.DatabaseNotFoundException;
+import main.se.kth.salessystem.integration.ItemNotFoundException;
+import main.se.kth.salessystem.integration.TotalRevenueFileOutput;
+import main.se.kth.salessystem.view.TotalRevenueView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +28,7 @@ class TestController {
      */
     @BeforeEach
     void setUp() {
-        controll1 = new Controller();
+        controll1 = new Controller(new TotalRevenueFileOutput(), new TotalRevenueView());
         controll1.startNewSale(1);
 
     }
@@ -40,7 +44,7 @@ class TestController {
      *
      */
     @Test
-    void testStartNewSale() {
+    void testStartNewSale() throws DatabaseNotFoundException, ItemNotFoundException {
         controll1.startNewSale(1);
         controll1.addItem(1);
         boolean result = controll1.endSale(10000, "TEST", "TEST");
@@ -48,9 +52,9 @@ class TestController {
     }
 
     @Test
-    void testAddItem() {
+    void testAddItem() throws DatabaseNotFoundException, ItemNotFoundException {
         boolean result = false;
-        controll1.addItem(0);
+            controll1.addItem(0);
         if (controll1.getString().equals("1x Tomat, Ekologisk -  24.5kr\n")) {
             result = true;
         }
@@ -79,7 +83,7 @@ class TestController {
     }
 
     @Test
-    void testAddItems() {
+    void testAddItems() throws DatabaseNotFoundException, ItemNotFoundException {
         boolean result = false;
         controll1.addItem(0, 2);
         if (controll1.getString().equals("2x Tomat, Ekologisk -  24.5kr\n")) {
@@ -94,7 +98,7 @@ class TestController {
      *
      */
     @Test
-    void testUndo(){
+    void testUndo() throws DatabaseNotFoundException, ItemNotFoundException {
         boolean isCorrect = false;
         controll1.addItem(1);
         controll1.undo();
@@ -106,7 +110,7 @@ class TestController {
      *
      */
     @Test
-    void testUndos(){
+    void testUndos() throws DatabaseNotFoundException, ItemNotFoundException {
         boolean isCorrect  = false;
         controll1.addItem(1, 2);
         controll1.addItem(2, 2);

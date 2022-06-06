@@ -2,7 +2,7 @@ package main.se.kth.salessystem.view;
 
 import main.se.kth.salessystem.model.Observer;
 
-abstract class TotalRevenue implements Observer {
+public abstract class TotalRevenue implements Observer {
     protected double totalRevenue;
     protected TotalRevenue () {
         totalRevenue = 0;
@@ -14,7 +14,7 @@ abstract class TotalRevenue implements Observer {
      * @param priceOfTheSaleThatWasJustMade
      */
     @Override
-    public void update(double priceOfTheSaleThatWasJustMade) {
+    public void newSaleWasMade(double priceOfTheSaleThatWasJustMade) {
         calculateTotalIncome ( priceOfTheSaleThatWasJustMade );
         showTotalIncome ();
     }

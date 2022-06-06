@@ -5,6 +5,7 @@ import main.se.kth.salessystem.integration.AccountingSystem;
 import main.se.kth.salessystem.integration.ExternalInventorySystem;
 import main.se.kth.salessystem.model.ItemScanner;
 import main.se.kth.salessystem.model.Sale;
+import main.se.kth.salessystem.view.TotalRevenueView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,14 +28,16 @@ class TestAccountingSystem {
     @BeforeEach
     void setUp() { //Happens before each se.kth.salessystem.test
         temp = new Sale();
-        ctrl = new Controller();
+        ctrl = new Controller(new TotalRevenueFileOutput(), new TotalRevenueView());
         ac = new AccountingSystem();
         itemScanner = new ItemScanner( ExternalInventorySystem.getInstance());
         try{
             itemScanner.addItemFromBarcode(2,temp, 2);
         }
-        catch (IOException e){
-            e.printStackTrace(); //never gonna happen lmao
+        catch (DatabaseNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (ItemNotFoundException e) {
+            throw new RuntimeException(e);
         }
         dto = temp.endSale("uwu", "kassa 2");
 

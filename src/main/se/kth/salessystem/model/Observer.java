@@ -1,12 +1,10 @@
 package main.se.kth.salessystem.model;
 
+/**
+ * Interface for making new observers that handle an update in any double. We've got a simple toString that
+ * is implemented in all extensions.
+ */
 public interface Observer {
-    void update(double amount);
-
-
-    /**
-     * Higher grade task 1
-     * We're implementing a template method to use for both observers
-     */
+    void newSaleWasMade(double amount);
 
 }
