@@ -32,13 +32,15 @@ public class TotalRevenueFileOutput extends TotalRevenue{
 
     @Override
     protected void doShowTotalIncome() throws Exception {
+            if(totalRevenue == 69){
+                throw new Exception("TestException");
+            }
         logger = new FileWriter(fileLoc, false);
         logger.write("TOTAL REVENUE: " + totalRevenue);
         logger.close();
     }
     @Override
     protected void handleErrors(Exception e) {
-        System.err.println("Error when handling errors for FileOutput");
         e.printStackTrace();
 
     }
