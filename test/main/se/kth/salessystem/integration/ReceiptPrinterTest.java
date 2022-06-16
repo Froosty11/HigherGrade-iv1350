@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReceiptPrinterTest {
     ReceiptPrinter rPrinter;
-    PrintStream printStreamOut;
+    PrintStream printSysOut;
     ByteArrayOutputStream buffer2BePrinted;
 
     /**
@@ -31,7 +31,12 @@ class ReceiptPrinterTest {
         Controller temp = new Controller(new TotalRevenueFileOutput(), new TotalRevenueView());
         rPrinter = new ReceiptPrinter();
         buffer2BePrinted = new ByteArrayOutputStream();
+        printSysOut = System.out;
         System.setOut(new PrintStream(buffer2BePrinted));
+    }
+    @AfterEach
+    void tearDown(){
+        System.setOut(printSysOut);
     }
 
     /**

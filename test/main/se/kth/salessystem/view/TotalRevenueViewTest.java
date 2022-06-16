@@ -2,6 +2,7 @@ package main.se.kth.salessystem.view;
 
 import main.se.kth.salessystem.controller.Controller;
 import main.se.kth.salessystem.integration.TotalRevenueFileOutput;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TotalRevenueViewTest {
     private TotalRevenueView toBeTested;
+
+    private PrintStream printSysOut;
     private ByteArrayOutputStream buffer2BePrinted;
 
     /**
@@ -21,8 +24,13 @@ class TotalRevenueViewTest {
     void setUp() {
         Controller temp = new Controller(new TotalRevenueFileOutput(), new TotalRevenueView());
         toBeTested = new TotalRevenueView();
+        printSysOut = System.out;
         buffer2BePrinted = new ByteArrayOutputStream();
         System.setOut(new PrintStream( buffer2BePrinted));
+    }
+    @AfterEach
+    void tearDown(){
+        System.setOut(printSysOut);
     }
 
     /**
